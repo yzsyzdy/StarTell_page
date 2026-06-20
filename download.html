@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarTell 星语 — 下载</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Noto+Sans+SC:wght@300..700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: #0a0a0f;
+  color: #f0f0f0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+/* ── 背景装饰 ── */
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-glow.g1 { width: 600px; height: 600px; top: -200px; right: -200px; background: rgba(74,144,217,0.06); }
+.bg-glow.g2 { width: 500px; height: 500px; bottom: -100px; left: -150px; background: rgba(255,159,75,0.04); }
+.bg-glow.g3 { width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(108,92,231,0.03); }
+
+/* ── 网格纹理 ── */
+.grid {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── 容器 ── */
+.container {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto; padding: 40px 24px;
+}
+
+/* ── 导航 ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0; margin-bottom: 80px;
+}
+nav .logo {
+  font-size: 20px; font-weight: 700;
+  background: linear-gradient(135deg, #fff, #FF9F4B);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+nav .logo span { color: #FF9F4B; }
+nav .nav-links { display: flex; gap: 32px; font-size: 14px; }
+nav .nav-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+nav .nav-links a:hover { color: rgba(255,255,255,0.8); }
+
+/* ── Hero ── */
+.hero { text-align: center; margin-bottom: 120px; }
+.hero .badge {
+  display: inline-block; padding: 6px 16px; border-radius: 20px;
+  background: rgba(255,159,75,0.08); border: 1px solid rgba(255,159,75,0.12);
+  font-size: 12px; color: #FF9F4B; letter-spacing: 1px; margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(40px, 6vw, 64px); font-weight: 700; line-height: 1.15;
+  margin-bottom: 16px; letter-spacing: -1px;
+}
+.hero h1 .gradient {
+  background: linear-gradient(135deg, #fff 40%, #FF9F4B 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 18px; color: rgba(255,255,255,0.4); max-width: 520px;
+  margin: 0 auto 40px; font-weight: 300;
+}
+.hero .actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 600;
+  text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #4A90D9, #357ABD); color: #fff;
+  box-shadow: 0 4px 20px rgba(74,144,217,0.2);
+}
+.btn-primary:hover {
+  transform: translateY(-2px); box-shadow: 0 8px 30px rgba(74,144,217,0.3);
+}
+.btn-secondary {
+  background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.08); color: #fff;
+}
+.btn .small { font-size: 11px; font-weight: 400; opacity: 0.6; }
+.btn .icon { font-size: 20px; }
+
+/* ── 特性网格 ── */
+.features { margin-bottom: 120px; }
+.features h2 {
+  text-align: center; font-size: 28px; font-weight: 600; margin-bottom: 48px;
+  color: rgba(255,255,255,0.9);
+}
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.feature-card {
+  padding: 28px; border-radius: 16px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s ease;
+}
+.feature-card:hover {
+  background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+.feature-card .icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; margin-bottom: 16px;
+}
+.feature-card .icon.c1 { background: rgba(74,144,217,0.1); color: #6BB0F5; }
+.feature-card .icon.c2 { background: rgba(255,159,75,0.1); color: #FF9F4B; }
+.feature-card .icon.c3 { background: rgba(108,92,231,0.1); color: #a29bfe; }
+.feature-card .icon.c4 { background: rgba(0,184,148,0.1); color: #55efc4; }
+.feature-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: rgba(255,255,255,0.85); }
+.feature-card p { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.7; }
+
+/* ── 预览区 ── */
+.preview { margin-bottom: 120px; text-align: center; }
+.preview h2 {
+  font-size: 28px; font-weight: 600; margin-bottom: 12px; color: rgba(255,255,255,0.9);
+}
+.preview .sub { font-size: 15px; color: rgba(255,255,255,0.3); margin-bottom: 40px; }
+.preview .mockup {
+  position: relative; max-width: 800px; margin: 0 auto;
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(135deg, #0B0E2A, #1A1040);
+  aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center;
+}
+.preview .mockup .placeholder {
+  font-size: 14px; color: rgba(255,255,255,0.08);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.preview .mockup .placeholder .ring {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; color: rgba(255,255,255,0.08);
+}
+
+/* ── 系统要求 ── */
+.requirements { margin-bottom: 100px; }
+.requirements h2 {
+  text-align: center; font-size: 28px; font-weight: 600; margin-bottom: 40px;
+  color: rgba(255,255,255,0.9);
+}
+.req-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;
+}
+.req-item {
+  padding: 20px; border-radius: 12px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+  text-align: center;
+}
+.req-item .label { font-size: 12px; color: rgba(255,255,255,0.25); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.req-item .value { font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.7); }
+
+/* ── Footer ── */
+footer {
+  text-align: center; padding: 40px 0 60px;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  font-size: 13px; color: rgba(255,255,255,0.15);
+}
+footer a { color: rgba(255,255,255,0.25); text-decoration: none; }
+footer a:hover { color: rgba(255,255,255,0.5); }
+footer .links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+
+/* ── 响应式 ── */
+@media (max-width: 640px) {
+  nav .nav-links { display: none; }
+  .container { padding: 24px 16px; }
+  .hero h1 { font-size: 32px; }
+  .hero p { font-size: 15px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .req-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-glow g3"></div>
+<div class="grid"></div>
+
+<div class="container">
+
+  <!-- Nav -->
+  <nav>
+    <div class="logo">✦ StarTell</div>
+    <div class="nav-links">
+      <a href="#">首页</a>
+      <a href="#features">功能</a>
+      <a href="#download">下载</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="download">
+    <div class="badge">v1.0 · 开源免费</div>
+    <h1><span class="gradient">你的桌面伴侣</span><br>Live2D · AI 对话</h1>
+    <p>一个会呼吸、会眨眼、能陪你聊天的 Live2D 桌面宠物。透明窗口、自由拖拽、AI 流式对话、5 套主题。</p>
+    <div class="actions">
+      <a href="StarTell.exe" class="btn btn-primary" download>
+        <span class="icon">⬇</span>
+        <span>下载 StarTell<br><span class="small">v1.0 · Windows · 206 MB</span></span>
+      </a>
+      <a href="https://github.com" target="_blank" class="btn btn-secondary">
+        <span class="icon">⌨</span>
+        <span>源代码<br><span class="small">GitHub · MIT License</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <h2>功能特性</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon c1">✦</div>
+        <h3>Live2D 实时渲染</h3>
+        <p>基于 PixiJS + Cubism 5 的高性能实时渲染，支持动作播放与表情切换。模型会随着你的鼠标移动视线。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon c2">💬</div>
+        <h3>AI 流式对话</h3>
+        <p>集成 OpenAI 兼容 API，支持流式回复、上下文记忆、自定义系统提示词。气泡式聊天界面，打字机效果逐字输出。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon c3">🎨</div>
+        <h3>5 套主题配色</h3>
+        <p>默认蓝、暗夜紫、薄荷绿、樱粉、活力橙。支持自定义颜色覆盖，保存后即时生效，无需重启。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon c4">🪟</div>
+        <h3>透明穿透窗口</h3>
+        <p>无边框置顶窗口，支持鼠标穿透模式。可自由拖拽摆放到屏幕任意位置，不干扰正常桌面操作。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon c1">⚙️</div>
+        <h3>丰富设置面板</h3>
+        <p>独立设置界面，调节显示缩放、AI 参数、系统提示词、主题配色。所有配置持久化保存。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon c2">🖥</div>
+        <h3>系统托盘常驻</h3>
+        <p>最小化到系统托盘，随时单击唤出。后台零资源占用，需要时即刻响应。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preview -->
+  <section class="preview">
+    <h2>一览</h2>
+    <p class="sub">透明窗口 + 聊天界面 + 右键菜单</p>
+    <div class="mockup">
+      <div class="placeholder">
+        <div class="ring">✦</div>
+        <span>promo.html 预览</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements -->
+  <section class="requirements">
+    <h2>系统要求</h2>
+    <div class="req-grid">
+      <div class="req-item"><div class="label">操作系统</div><div class="value">Windows 10/11</div></div>
+      <div class="req-item"><div class="label">架构</div><div class="value">x64</div></div>
+      <div class="req-item"><div class="label">运行时</div><div class="value">无需安装</div></div>
+      <div class="req-item"><div class="label">GPU</div><div class="value">支持 WebGL</div></div>
+      <div class="req-item"><div class="label">体积</div><div class="value">约 206 MB</div></div>
+      <div class="req-item"><div class="label">许可</div><div class="value">MIT · 开源免费</div></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="links">
+      <a href="https://github.com" target="_blank">GitHub</a>
+      <a href="#">关于</a>
+      <a href="mailto:hello@startell.app">联系</a>
+    </div>
+    <div>© 2026 StarTell · 基于 PyQt6 · Live2D · PixiJS</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
